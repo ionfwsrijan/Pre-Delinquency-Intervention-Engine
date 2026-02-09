@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import pandas as pd
 
-dataclass
+@dataclass
 class FeatureConfig:
     salary_delay_threshold_days: int = 3
     savings_drop_pct_threshold: float = 0.2
