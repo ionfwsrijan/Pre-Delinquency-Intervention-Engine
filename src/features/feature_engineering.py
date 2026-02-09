@@ -3,6 +3,7 @@ import pandas as pd
 
 @dataclass
 class FeatureConfig:
+    """Configuration for feature engineering thresholds (future use)."""
     salary_delay_threshold_days: int = 3
     savings_drop_pct_threshold: float = 0.2
 
@@ -17,7 +18,7 @@ def build_features(transactions: pd.DataFrame, balances: pd.DataFrame) -> pd.Dat
     ).dt.days
 
     # Example: savings drop feature
-    balances["savings_drop_pct"] = balances["balance"].pct_change()
+    balances["savings_drop_pct"] = balances.groupby("customer_id")["balance"].pct_change()
 
     features = pd.merge(
         salary_txn[["customer_id", "salary_delay_days"]],

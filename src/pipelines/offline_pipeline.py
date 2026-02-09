@@ -10,9 +10,10 @@ def run():
     labels = pd.read_csv("data/labels.csv")["label"]
 
     features = build_features(transactions, balances)
-    model = train_model(features.drop(columns=["customer_id"]), labels)
-
-    scores = score_customers(model, features.drop(columns=["customer_id"]))
+    feature_cols = features.drop(columns=["customer_id"])
+    
+    model = train_model(feature_cols, labels)
+    scores = score_customers(model, feature_cols)
     print(scores.head())
 
 if __name__ == "__main__":
